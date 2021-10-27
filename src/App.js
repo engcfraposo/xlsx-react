@@ -1,11 +1,18 @@
 import React from 'react';
-import Workbook from './components/workbook/workbook'
+import { useSelector } from 'react-redux';
+import SortComponent from './components/Sort';
+import Workbook from './components/Workbook'
 
 const App = () => {
+  const { users } = useSelector(state => state.excel)
   return (
-    <div style={{ padding: 10 }}>
+    <React.Fragment>
+    {!!users.body?(
+      <SortComponent />
+    ):(
       <Workbook />
-    </div>
+    )}
+    </React.Fragment>
   );
 }
 
