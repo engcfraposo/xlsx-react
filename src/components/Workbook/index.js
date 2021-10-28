@@ -11,6 +11,7 @@ function Workbook() {
 
   const { users } = useSelector(state => state.excel)
   const [selectedFile, setSelectedFile] = useState(null);
+  const [wrongText, setWrongText] = useState(false);
   const [tableRaw, setTableRaw] = useState({
     headers: null,
     body: null
@@ -29,6 +30,7 @@ useEffect(()=>{
 
 
   const handleSubmit = async e => {
+    setWrongText(false)
     e.preventDefault()
 
     const file = selectedFile
@@ -38,6 +40,10 @@ useEffect(()=>{
     const rows = await readXlsxFile(file)
 
     const headers = rows[0]
+    if(!headers.includes("Nome Completo")){
+      setWrongText(true)
+      return
+    }
 
     let array = []
 
@@ -54,7 +60,6 @@ useEffect(()=>{
       array.push(obj)
     }
     
-
     setTableRaw({
       ...tableRaw,
       headers,
@@ -75,9 +80,24 @@ useEffect(()=>{
           <li><b>2º linha: </b> Corpo da tabela</li>
         </ul>
         <form onSubmit={handleSubmit} className="container-fluid">
-        <Dropzone onFileUploaded={setSelectedFile}/>
+        <Dropzone 
+          onFileUploaded={setSelectedFile} 
+          wrongText={wrongText}
+          setWrongText={setWrongText}
+        />
           <br/>
-          <button style={{backgroundColor: "orange", borderColor: "white"}} type="submit" className={"btn btn-secondary"}>Preparar Sorteio</button>
+          <button 
+            style={
+                {
+                  backgroundColor: "orange", 
+                  borderColor: "white"
+                }
+              } 
+            type="submit" 
+            className={"btn btn-secondary"}
+          >
+            Preparar Sorteio
+          </button>
         </form>
       </div>
     );

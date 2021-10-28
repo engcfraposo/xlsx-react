@@ -5,11 +5,12 @@ import { RiFileExcel2Line } from 'react-icons/ri';
 import './styles.css';
 
 
-const Dropzone = ({ onFileUploaded }) => {
+const Dropzone = ({ onFileUploaded, wrongText, setWrongText }) => {
   const [selectedFile, setSelectedFile] = useState('');
 
   const onDrop = useCallback(
     (acceptedFiles) => {
+      setWrongText(false)
       const file = acceptedFiles[0];
 
       const fileName = file.name;
@@ -17,7 +18,7 @@ const Dropzone = ({ onFileUploaded }) => {
       setSelectedFile(fileName);
       onFileUploaded(file);
     },
-    [onFileUploaded],
+    [onFileUploaded, setWrongText],
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -33,9 +34,9 @@ const Dropzone = ({ onFileUploaded }) => {
    {
      selectedFile
      ? (
-        <p>
-        <RiFileExcel2Line />
-            {selectedFile}
+        <p style={{color:wrongText?"red":"#fff"}}>
+        <RiFileExcel2Line color={"green"}/>
+            {!wrongText?selectedFile:"Insira o excel com os dados incluso a coluna - Nome Completo"}
         </p>
      ) 
      : (
