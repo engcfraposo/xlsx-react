@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getExcel } from '../../store/ducks/excel/actions';
 
@@ -17,12 +17,14 @@ function SortComponent() {
     const [delay, setDelay] = React.useState(initialDelay);
     const [isFinal, setIsFinal] = React.useState(false);
   
-    const randomizeName = () => {
+    const randomizeName = useCallback(
+    () => {
       let index = Math.floor(Math.random() * names.length);
       setName(names[index]);
-    };
+    },[names]);
   
-    const shouldRandomizeName = () => {
+    const shouldRandomizeName = useCallback(
+    () => {
       if (count < limit) {
         randomizeName();
         setCount(count + 1);
@@ -43,7 +45,7 @@ function SortComponent() {
       if (count === limit && name) {
         setIsFinal(true);
       }
-    };
+    },[count, delay, name, randomizeName]);
   
     React.useEffect(() => {
       setTimeout(() => {
@@ -68,7 +70,7 @@ function SortComponent() {
         className={`text-center d-flex flex-column align-items-center justify-content-center fade-in ${isFinal && " text-white"}`}
         style={{ height: "100vh", backgroundColor: `${isFinal ? "#0644A0" : "white"}` }}
       >
-        <div>
+        <div className="container-fluid">
           <h1 className={`display-1`}>{!!name&&name.toUpperCase()}</h1>
         </div>
         <div className="container-fluid">

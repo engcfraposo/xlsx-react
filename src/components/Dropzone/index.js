@@ -20,7 +20,7 @@ const Dropzone = ({ onFileUploaded }) => {
     [onFileUploaded],
   );
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   });

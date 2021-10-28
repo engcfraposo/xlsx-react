@@ -1,4 +1,5 @@
 .dropzone {
+    min-width: 300px;
     height: 300px;
     background: #7695c2;
     border-radius: 10px;
@@ -6,7 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 400px;
+    margin: 0 20%;
     margin-top: 48px;
     outline: 0;
   }

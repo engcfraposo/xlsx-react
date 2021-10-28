@@ -50,12 +50,11 @@ useEffect(()=>{
           ...obj, 
           [headers[j]]: row[j] 
         }
-      }
-
+      } 
       array.push(obj)
-      
     }
     
+
     setTableRaw({
       ...tableRaw,
       headers,
@@ -63,33 +62,8 @@ useEffect(()=>{
     })
   }
 
-  const renderHeader = () => {
-    const headers = users.headers || []
 
-    return (
-      <tr>
-        {headers.map((header, i) => <th key={i}>{header}</th>)}
-      </tr>
-    )
-  }
-
-  const renderBody = () => {
-    const data = users.body || []
-
-    return data.map((obj, i) => {
-      return (
-        <tr key={i}>
-          {
-            Object.keys(obj).map((column, j) => {
-              return (
-                <td key={j}>{obj[column]}</td>
-              )
-            })
-          }
-        </tr>
-      )
-    })
-    }
+  
     return (
       <div className={`text-center d-flex flex-column align-items-center justify-content-center text-white fade-in`}
       style={{ height: "100vh", backgroundColor: "#0644A0" }}>

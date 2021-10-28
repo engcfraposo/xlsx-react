@@ -1,21 +1,21 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-
-html,
-body,
-#root {
-  height: 100vh;
-}
-
-.fade-in {
-    animation: fadeIn 1.0s ease forwards;
-}
-
 @keyframes fadeIn {
 	from {
 		opacity: 0;
 	}
-
 	to {
 		opacity: 1;
 	}
+}
+html {
+	height: 100vh;
+}
+body {
+	height: 100vh;
+}
+#root {
+	height: 100vh;
+}
+.fade-in {
+	animation: fadeIn 1.0s ease forwards;
 }
