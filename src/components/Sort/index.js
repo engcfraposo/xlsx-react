@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getExcel } from '../../store/ducks/excel/actions';
 
@@ -11,11 +11,11 @@ function SortComponent() {
     const initialDelay = 50;
     const limit = 30;
   
-    const [name, setName] = React.useState(null);
-    const [count, setCount] = React.useState(limit);
-    const [names, setNames] = React.useState([]);
-    const [delay, setDelay] = React.useState(initialDelay);
-    const [isFinal, setIsFinal] = React.useState(false);
+    const [name, setName] = useState(null);
+    const [count, setCount] = useState(limit);
+    const [names, setNames] = useState([]);
+    const [delay, setDelay] = useState(initialDelay);
+    const [isFinal, setIsFinal] = useState(false);
   
     const randomizeName = useCallback(
     () => {
@@ -47,13 +47,13 @@ function SortComponent() {
       }
     },[count, delay, name, randomizeName]);
   
-    React.useEffect(() => {
+    useEffect(() => {
       setTimeout(() => {
         shouldRandomizeName();
       }, delay);
     }, [count, delay, shouldRandomizeName]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if(!!users.body){
         setNames(users.body.map(user => user["Nome Completo"]))
       }
